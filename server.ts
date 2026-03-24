@@ -1,4 +1,5 @@
 import app from "./app";
+import "dotenv/config";
 
 // get the server object from the http module
 import { Server } from "http";
