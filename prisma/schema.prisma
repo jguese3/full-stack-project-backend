@@ -13,3 +13,16 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum GameStatus {
+  backlog
+  playing
+  completed
+}
+
+model UserGame {
+  id        Int        @id @default(autoincrement())
+  title     String
+  platform  String
+  status    GameStatus @default(backlog)
+}
