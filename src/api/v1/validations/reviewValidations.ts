@@ -1,8 +1,8 @@
 import Joi, { ObjectSchema } from "joi";
 
 export const createReviewSchema: ObjectSchema = Joi.object({
-    gameId: Joi.string().uuid().required(),
-    userId: Joi.string().uuid().required(),
+    gameId: Joi.number().required(),
+    username: Joi.string().min(1).required(),
     comment: Joi.string().required(),
     ratings: Joi.number().integer().min(1).max(5).required(),
     date: Joi.date().optional()

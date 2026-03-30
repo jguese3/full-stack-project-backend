@@ -15,10 +15,20 @@ export const getAllReviews = async (
     next: NextFunction,
 ): Promise<void> => {
     try {
-        const gameId = typeof req.query.gameId === "string" ? req.query.gameId : undefined;
-        const userId = typeof req.query.userId === "string" ? req.query.userId : undefined;
+        const rawGameId = typeof req.query.gameId === "string" ? req.query.gameId : undefined;
+        const rawUsername = typeof req.query.username === "string" ? req.query.username : undefined;
+        const rawUserId = typeof req.query.userId === "string" ? req.query.userId : undefined;
         const limitRaw = typeof req.query.limit === "string" ? Number(req.query.limit) : NaN;
         const offsetRaw = typeof req.query.offset === "string" ? Number(req.query.offset) : NaN;
+
+        const gameIdAsNumber = rawGameId ? Number(rawGameId) : NaN;
+        const gameId = Number.isInteger(gameIdAsNumber) && gameIdAsNumber > 0
+            ? String(gameIdAsNumber)
+            : rawGameId;
+
+        const userId = rawUsername
+            ? rawUsername
+            : rawUserId;
 
         const limit = Number.isInteger(limitRaw) && limitRaw > 0 ? limitRaw : 10;
         const offset = Number.isInteger(offsetRaw) && offsetRaw >= 0 ? offsetRaw : 0;
@@ -63,7 +73,21 @@ export const createReview = async (
     next: NextFunction,
 ): Promise<void> => {
     try {
-        const newReview = await gameReviewService.createReview(req.body);
+        const body = req.body as {
+            gameId: number;
+            username: string;
+            comment: string;
+            ratings: number;
+            date?: Date;
+        };
+
+        const newReview = await gameReviewService.createReview({
+            gameId: String(body.gameId),
+            userId: body.username,
+            comment: body.comment,
+            ratings: body.ratings,
+            date: body.date,
+        });
         res.status(201).json(
             successResponse(newReview, "Review created successfully"),
         );
