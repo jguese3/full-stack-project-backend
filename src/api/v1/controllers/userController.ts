@@ -39,3 +39,16 @@ export const updateUser = async (
         next(error);
     }
 }
+
+export const fetchUsers = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const users: User[] = await userService.fetchUsers();
+        res.json(successResponse(users, "Users retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+}

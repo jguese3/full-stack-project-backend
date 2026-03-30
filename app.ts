@@ -8,7 +8,7 @@ import userRoutes from "./src/api/v1/routes/userRoutes"
 // initialize express application
 const app: Express = express();
 
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(cors({ origin: "http://localhost:5173" }));
 
 // allow express to parse json
 app.use(express.json());

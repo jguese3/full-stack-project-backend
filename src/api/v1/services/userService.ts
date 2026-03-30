@@ -28,3 +28,11 @@ export const updateUser = async (
         throw new Error(`Failed to update user with id ${id}`)
     }
 }
+
+export const fetchUsers = async (): Promise<User[]> => {
+    try {
+        return await prisma.user.findMany();
+    } catch (error) {
+        throw new Error("Failed to fetch users")
+    }
+}
