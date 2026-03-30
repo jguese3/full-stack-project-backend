@@ -11,7 +11,7 @@ export const getUserById = async(
 ): Promise<void> => {
     try {
         const user: User | null = 
-            await userService.getUserById(Number.parseInt(req.params.id));
+            await userService.getUserById(Number.parseInt(req.params.id as string));
         if(user) {
             res.json(successResponse(user, "User retrieved successfully"))
         } else {
@@ -19,6 +19,23 @@ export const getUserById = async(
         }
 
     } catch(error) {
+        next(error);
+    }
+}
+
+export const updateUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const updateUser = await userService.updateUser(
+            Number.parseInt(req.params.id as string),
+            req.body
+        );
+
+        res.json(successResponse(updateUser, "User updated successfully"));
+    } catch (error) {
         next(error);
     }
 }
