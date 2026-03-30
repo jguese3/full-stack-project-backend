@@ -4,14 +4,14 @@ import * as userService from "../services/userService";
 import { successResponse } from "../models/responseModel";
 
 
-export const getUserById = async(
+export const getUserByUsername = async(
     req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> => {
     try {
         const user: User | null = 
-            await userService.getUserById(Number.parseInt(req.params.id as string));
+            await userService.getUserByUsername(req.params.username as string);
         if(user) {
             res.json(successResponse(user, "User retrieved successfully"))
         } else {
