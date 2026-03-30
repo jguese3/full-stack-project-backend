@@ -10,14 +10,24 @@ import { successResponse } from "../models/responseModel";
  */
 
 export const getAllReviews = async (
-    _req: Request,
+    req: Request,
     res: Response,
     next: NextFunction,
 ): Promise<void> => {
     try {
+        const gameId = typeof req.query.gameId === "string" ? req.query.gameId : undefined;
+        const userId = typeof req.query.userId === "string" ? req.query.userId : undefined;
+        const limitRaw = typeof req.query.limit === "string" ? Number(req.query.limit) : NaN;
+        const offsetRaw = typeof req.query.offset === "string" ? Number(req.query.offset) : NaN;
+
+        const limit = Number.isInteger(limitRaw) && limitRaw > 0 ? limitRaw : 10;
+        const offset = Number.isInteger(offsetRaw) && offsetRaw >= 0 ? offsetRaw : 0;
+
         const reviews = await gameReviewService.getAllReviews({
-            limit: 10,
-            offset: 0,
+            gameId,
+            userId,
+            limit,
+            offset,
         });
         res.status(200).json(
             successResponse(reviews, "Reviews retrieved successfully"),

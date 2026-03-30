@@ -1,5 +1,5 @@
 import { GameReview } from "@prisma/client";
-import { prisma } from "../../../prisma/client";
+import { prisma } from "../../../lib/prisma";
 
 type ListGameReviewFilters = {
     gameId?: string;

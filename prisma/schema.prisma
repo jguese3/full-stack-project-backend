@@ -20,10 +20,26 @@ model GameReview {
   comment  String
   ratings  Int
   date     DateTime @default(now())
+  resources GameReviewResource[]
 
   @@index([gameId])
   @@index([userId])
 }
+
+model GameReviewResource {
+  id           Int      @id @default(autoincrement())
+  gameReviewId Int
+  title        String
+  type         String   @default("other")
+  url          String
+  createdAt    DateTime @default(now())
+
+  gameReview GameReview @relation(fields: [gameReviewId], references: [reviewId], onDelete: Cascade)
+
+  @@index([gameReviewId])
+  @@unique([gameReviewId, url])
+}
+
 enum GameStatus {
   backlog
   playing
