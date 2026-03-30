@@ -2,6 +2,7 @@ import express, {Express} from "express";
 import cors from "cors";
 
 // Routes import
+import gameReviewRoutes from "./src/api/v1/routes/gameReviewRoutes";
 import userGameRoutes from "./src/api/v1/routes/userGameRoutes";
 import userRoutes from "./src/api/v1/routes/userRoutes"
 
@@ -14,6 +15,7 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 // mount routes
+app.use("/api/gamereviews", gameReviewRoutes);
 app.use("/user-games", userGameRoutes);
 app.use("/api/v1", userRoutes);
 
