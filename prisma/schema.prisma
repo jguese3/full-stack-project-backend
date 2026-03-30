@@ -36,3 +36,10 @@ model UserGame {
   platform  String
   status    GameStatus @default(backlog)
 }
+
+model User {
+  id                Int         @id @default(autoincrement())
+  userName          String      @unique
+  bio               String?
+  isFollowing       Boolean     @default(false) 
+}
