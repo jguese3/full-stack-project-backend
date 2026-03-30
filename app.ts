@@ -1,5 +1,6 @@
 import express, {Express} from "express";
 import cors from "cors";
+import gameReviewRoutes from "./src/api/v1/routes/gameReviewRoutes";
 
 // initialize express application
 const app: Express = express();
@@ -8,6 +9,8 @@ app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 // allow express to parse json
 app.use(express.json());
+
+app.use("/api/gamereviews", gameReviewRoutes);
 
 // listen for requests on root and send simple text response
 app.get("/",  (_req, res) => {

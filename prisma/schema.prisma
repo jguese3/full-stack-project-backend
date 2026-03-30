@@ -5,11 +5,22 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model GameReview {
+  reviewId Int      @id @default(autoincrement())
+  gameId   String
+  userId   String
+  comment  String
+  ratings  Int
+  date     DateTime @default(now())
+
+  @@index([gameId])
+  @@index([userId])
 }
