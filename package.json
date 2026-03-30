@@ -4,6 +4,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "joi": "^18.1.1",
     "prisma": "^6.19.2"
   },
   "devDependencies": {
@@ -14,9 +15,9 @@
     "typescript": "^6.0.2"
   },
   "scripts": {
-  "dev": "ts-node-dev --respawn --transpile-only server.ts",
-  "start": "ts-node-dev --respawn --transpile-only server.ts",
-  "prisma:migrate": "prisma migrate dev",
-  "prisma:generate": "prisma generate"
+    "dev": "ts-node-dev --respawn --transpile-only server.ts",
+    "start": "ts-node-dev --respawn --transpile-only server.ts",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate"
   }
 }
