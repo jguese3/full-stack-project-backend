@@ -24,3 +24,15 @@ model GameReview {
   @@index([gameId])
   @@index([userId])
 }
+enum GameStatus {
+  backlog
+  playing
+  completed
+}
+
+model UserGame {
+  id        Int        @id @default(autoincrement())
+  title     String
+  platform  String
+  status    GameStatus @default(backlog)
+}
