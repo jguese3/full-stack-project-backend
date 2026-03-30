@@ -9,12 +9,8 @@ export const getUserById = async(id: number): Promise<User | null> => {
             }
         });
 
-        if(!user) {
-            return null;
-        } else{
-            return user;
-        }
-    } catch(error) {
-        throw new Error(`Failed to fetch user with id ${id}`);
+        return user;
+    } catch (error) {
+        throw new Error(`Failed to fetch user with id ${id}`)
     }
-}
+};
