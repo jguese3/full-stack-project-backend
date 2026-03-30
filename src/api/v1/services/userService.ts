@@ -3,7 +3,7 @@ import prisma from "../../../../prisma/client"
 
 export const getUserById = async(id: number): Promise<User | null> => {
     try {
-        const user = prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: id
             }
